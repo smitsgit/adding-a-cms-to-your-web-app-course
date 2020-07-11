@@ -1,7 +1,9 @@
 import os
 import sys
 
+
 folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+print("####", folder, "####")
 sys.path.insert(0, folder)
 
 import logbook
@@ -48,11 +50,18 @@ def register_blueprints(log: logbook.Logger):
     from pypi_org.views import package_views
     from pypi_org.views import account_views
     from pypi_org.views import seo_view
+    from pypi_org.views import cms_views
+    from pypi_org.views import error_views
+    from pypi_org.views import admin_views
 
-    app.register_blueprint(package_views.blueprint)
     app.register_blueprint(home_views.blueprint)
+    app.register_blueprint(admin_views.blueprint)
+    app.register_blueprint(error_views.blueprint)
+    app.register_blueprint(package_views.blueprint)
     app.register_blueprint(account_views.blueprint)
     app.register_blueprint(seo_view.blueprint)
+    app.register_blueprint(cms_views.blueprint)
+
 
     log.notice("Registered blueprints.")
 
